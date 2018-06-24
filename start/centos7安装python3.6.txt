@@ -1,0 +1,23 @@
+
+1、查看已安装的Python包
+    yum list installed | grep python
+
+2、卸载Python3.4
+    yum remove python3*
+
+3、安装gcc zlib-devel openssl sqlite-devel
+    yum install gcc zlib-devel openssl sqlite-devel
+
+4、编译安装python
+    ./configure
+    make
+    make install
+
+5、python3 --version
+
+====================================================================
+
+pip使用：
+    pip list
+    pip instal <name>
+    pip uninstall <name>
