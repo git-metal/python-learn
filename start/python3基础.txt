@@ -1,0 +1,212 @@
+
+设置python文件的编码：
+    #!/usr/bin/python 
+    # -*- coding: utf-8 -*- 或者 
+    # coding=utf-8
+    
+
+
+编码:
+    #在最新的Python 3版本中，字符串是以Unicode编码的
+    #Python对bytes类型的数据用带b前缀的单引号或双引号表示
+        x = b'ABC'
+    #以Unicode表示的str通过encode()方法可以编码为指定的bytes
+        'ABC'.encode('ascii')
+        '中文'.encode('utf-8')
+    #从网络或磁盘上读取了字节流，那么读到的数据就是bytes。要把bytes变为str，就需要用decode()方法
+        b'ABC'.decode('ascii')
+        b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8')
+
+标准数据类型：
+    不可变数据（3 个）：Number（数字）、String（字符串）、Tuple（元组）；
+    可变数据（3 个）：List（列表）、Dictionary（字典）、Set（集合）
+    
+    dict: dict = {}  d = {'Michael': 95, 'Bob': 75, 'Tracy': 85}
+    set: set = set([1,2,3]) #要创建一个set，需要提供一个list作为输入集合
+
+    #Number
+        int float bool complex
+    #String
+        索引值以 0 为开始值，-1 为从末尾的开始位置
+        加号 (+) 是字符串的连接符， 星号 (*) 表示复制当前字符串，紧跟的数字为复制的次数
+            print (str)          # 输出字符串                       //Runoob
+            print (str[0:-1])    # 输出第一个到倒数第二个的所有字符   //Runoo  (不包括最后一个！)
+            print (str[0])       # 输出字符串第一个字符              //R
+            print (str[2:5])     # 输出从第三个开始到第五个的字符     //noo
+            print (str[2:])      # 输出从第三个开始的后的所有字符     //noob
+            print (str * 2)      # 输出字符串两次                    //RunoobRunoob
+            print (str + "TEST") # 连接字符串                       //RunoobTEST
+
+切片：
+    L = list(range(100))
+    L[:10]          #取前10个
+    L[-10:]         #取后10个
+    L[10:20]        #前11-20个数
+    L[:10:2]        #前10个数，每两个取一个
+    L[::5]          #所有数，每5个取一个
+    L[:]            #原样复制一个list，深度复制，地址不一样
+
+列表生成式：
+    #生成lis[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    list(range(1, 11))
+
+    #生成[1x1, 2x2, 3x3, ..., 10x10]
+    [x * x for x in range(1, 11)]
+    [x * x for x in range(1, 11) if x % 2 == 0]
+
+    #生成全排列 ['AX', 'AY', 'AZ', 'BX', 'BY', 'BZ', 'CX', 'CY', 'CZ']
+    [m + n for m in 'ABC' for n in 'XYZ']
+
+    #把一个list中所有的字符串变成小写
+    [s.lower() for s in L]
+
+生成器：(一边循环一边计算的机制，称为生成器：generator,节约内存)
+    L = [x * x for x in range(10)]  #L是一个list
+    g = (x * x for x in range(10))  #g是一个generator
+    可以通过next(g)函数来访问生成器，不过一般通过for循环来访问
+
+    #定义generator的另一种方法，如果一个函数定义中包含yield关键字，那么这个函数就不再是一个普通函数，而是一个generator
+
+
+迭代器：
+    from collections import Iterable
+
+    #可以使用isinstance()判断一个对象是否是Iterable对象：
+    isinstance([], Iterable)
+
+函数式编程： functools
+    #高阶函数
+        1、变量可以指向函数
+        2、函数本身也可以赋值给变量
+        3、函数名也是变量
+        4、函数的参数能接收函数名（称为高阶函数）
+
+        #map/reduce
+        map()函数接收两个参数，一个是函数，一个是Iterable，map将传入的函数依次作用到序列的每个元素，并把结果作为新的Iterator返回
+        reduce()把一个函数作用在一个序列[x1, x2, x3, ...]上，这个函数必须接收两个参数，reduce把结果继续和序列的下一个元素做累积计算
+
+        #filter
+        Python内建的filter()函数用于过滤序列
+
+        #sorted
+        sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower, reverse=True)
+
+    #返回函数
+        高阶函数除了可以接受函数作为参数外，还可以把函数作为结果值返回
+
+        #闭包
+        返回闭包时牢记一点：返回函数不要引用任何循环变量，或者后续会发生变化的变量
+        如果一定要引用循环变量怎么办？方法是再创建一个函数，用该函数的参数绑定循环变量当前的值，无论该循环变量后续如何更改，已绑定到函数参数的值不变
+
+    #匿名函数 lambda
+    list(map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9]))
+    匿名函数有个限制，就是只能有一个表达式，不用写return，返回值就是该表达式的结果
+
+    #装饰器：在代码运行期间动态增加功能
+
+
+面向对象：
+    #给类的实例绑定方法
+    def set_age(self, age):
+    s.set_age = MethodType(set_age, s)
+
+    #给类绑定方法
+    def set_score(self, score):
+    Student.set_score = set_score
+
+    #限制实例的属性
+     __slots__ = ('name', 'age') # 用tuple定义允许绑定的属性名称
+
+    #@property装饰器（把一个方法变成属性调用）
+    @property               #获取属性值
+    @{function}.setter      #设置属性值
+
+IO编程：
+    #读文件
+        open()          #open('/Users/michael/test.txt', 'r')
+        read()          #
+        readlines()
+        close()
+        with open       #with open('/path/to/file', 'r') as f: 不要要调用close关闭
+
+    #file-like Object
+        像open()函数返回的这种有个read()方法的对象，在Python中统称为file-like Object。除了file外，还可以是内存的字节流，网络流，自定义流等等。file-like Object不要求从特定类继承，只要写个read()方法就行。
+        StringIO就是在内存中创建的file-like Object，常用作临时缓冲。
+
+    #二进制文件
+        f = open('/Users/michael/test.jpg', 'rb')
+
+    #字符编码
+        f = open('/Users/michael/gbk.txt', 'r', encoding='gbk')
+
+    #写文件
+         f = open('/Users/michael/test.txt', 'w')
+         with open('/Users/michael/test.txt', 'w') as f:
+
+    #StringIO 数据读写不一定是文件，也可以在内存中读写，StringIO操作的只能是str
+        from io import StringIO
+        f = StringIO()
+        f.wirte("hahaha")   #写内存
+        f.getvalue()        #读内存
+
+    #BytesIO 操作二进制数据
+        from io import BytesIO
+        f = BytesIO()
+        f.write('中文'.encode('utf-8'))
+        print(f.getvalue())
+
+    #序列化 (import pickle)
+        d = dict(name='Bob', age=20, score=88)
+        pickle.dumps(d)         #把任意对象序列化成一个bytes
+        pickle.dump(d, f)       #直接把对象序列化后写入一个file-like Object  //f = open('dump.txt', 'wb')
+        pickle.loads()          #
+        pickle.load(f)          #f = open('dump.txt', 'rb')
+
+    #json (import json)
+        d = dict(name='Bob', age=20, score=88)
+        json.dumps(d)           #python对象转换成json字符串  '{"age": 20, "score": 88, "name": "Bob"}'
+        json_str = '{"age": 20, "score": 88, "name": "Bob"}'
+        json.loads(json_str)    #json字符串转换成python对象   {'age': 20, 'score': 88, 'name': 'Bob'}
+
+        #转换class对象
+        json.dumps(s, default=func)                         #class对象转换成json
+        json.dumps(s, default=lambda obj: obj.__dict__)     #class对象转换成json
+        json.loads(json_str, object_hook=func)              #json字符串转换成class对象
+            #class对象转换成json
+            def student2dict(std):
+                return {
+                    'name': std.name,
+                    'age': std.age,
+                    'score': std.score
+                }
+            #json字符串转换成class对象
+            def dict2student(d):
+                return Student(d['name'], d['age'], d['score'])
+
+进程和线程：
+    #多进程：Python既支持多进程，又支持多线程  
+        在Unix/Linux下，可以使用fork()调用实现多进程。
+        要实现跨平台的多进程，可以使用multiprocessing模块。
+        进程间通信是通过Queue、Pipes等实现的。
+
+    #多线程：
+        Python的标准库提供了两个模块：_thread和threading，_thread是低级模块，threading是高级模块，对_thread进行了封装。
+        #lock
+            threading.Lock()
+        #GIL锁：Global Interpreter Lock
+            任何Python线程执行前，必须先获得GIL锁，然后，每执行100条字节码，解释器就自动释放GIL锁，让别的线程有机会执行。
+            这个GIL全局锁实际上把所有线程的执行代码都给上了锁，所以，多线程在Python中只能交替执行，即使100个线程跑在100核CPU上，也只能用到1个核
+
+            所以，在Python中，可以使用多线程，但不要指望能有效利用多核。如果一定要通过多线程利用多核，那只能通过C扩展来实现。
+
+    #ThreadLocal
+        threading.local()
+
+正则表达式：import re
+    re.match()      #字符串匹配  re.match(r'^\d{3}\-\d{3,8}$', '010-12345')
+    re.split()      #字符串分割  re.split(r'[\s\,]+', 'a,b, c  d')
+    re.compile(r'^(\d{3})-(\d{3,8})$')  #编译，可重复使用，提高速率
+
+
+
+

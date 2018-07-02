@@ -1,0 +1,14 @@
+
+1、安装Django (https://www.djangoproject.com/download/)
+    pip3 install Django==2.0.6
+
+2、django-admin 
+
+创建新的工程: django-admin startproject testdj
+启动: python3 manage.py runserver 0.0.0.0:8000
+设置允许其他主机登录: 
+    vim testdj/setting.py
+    ALLOWED_HOSTS = ['*'] 
+    
+
+
