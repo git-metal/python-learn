@@ -1,0 +1,4 @@
+
+方法1：
+    在python的安装目录下新建文件 site-packages/mypath.pth
+    文件内容：/mnt/test/lib
