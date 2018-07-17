@@ -55,10 +55,35 @@ python3多进程：
 
     #subprocess：子进程
 
-    #进程间通信
-        Queue
-        Pipes
+    #进程间同步
+        #Lock （from multiprocessing import Lock）
+            lock = Lock()
+            lock.acquire()
+            lock.release()
+
+    #进程间共享数据
+        #通过 Value和 Array共享
+
+        #通过Manager()共享
+            support types list, dict, Namespace, Lock, RLock, Semaphore, BoundedSemaphore, Condition, Event, Barrier, Queue, Value and Array
 
 
+
+Queue:
+    可以用于多进程和多线程之间通信吗，使线程和进程安全的
+    #队列类型
+        Queue：先进先出队列
+        LifoQueue：后进先出队列
+        PriorityQueue：优先级队列
+        deque：双线队列，两端都可以操作
+
+    #Queue方法
+        task_done():意味着之前入队的一个任务已经完成。由队列的消费者线程调用。
+        join():阻塞调用线程，直到队列中的所有任务被处理掉。
+            当消费者线程调用task_done()（意味着有消费者取得任务并完成任务），未完成的任务数就会减少。当未完成的任务数降到0，join()解除阻塞。
+
+Pipes：
+    
+    
 
 
