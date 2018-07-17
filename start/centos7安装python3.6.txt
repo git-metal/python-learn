@@ -21,3 +21,4 @@ pip使用：
     pip list
     pip instal <name>
     pip uninstall <name>
+    pip install --proxy http://<username>:<password>@<proxyip>:<proxyport> <package>
