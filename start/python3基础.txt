@@ -170,6 +170,7 @@ IO编程：
         json.loads(json_str)    #json字符串转换成python对象   {'age': 20, 'score': 88, 'name': 'Bob'}
 
         #转换class对象
+        json.dumps(obj.__dict__)                            #class对象转换成json
         json.dumps(s, default=func)                         #class对象转换成json
         json.dumps(s, default=lambda obj: obj.__dict__)     #class对象转换成json
         json.loads(json_str, object_hook=func)              #json字符串转换成class对象
@@ -215,3 +216,17 @@ IO编程：
     3.函数中有global关键字，变量本质就是全局变量，可读取全局变量，也可操作全局变量
 
 
+__str__ __repr__的区别:
+    __str__：是面向用户的，更友好的显示
+    __repr__：面向程序员，如果不复写__repr__方法，返回的是对象的地址
+
+    #例子:
+    class Item():
+        def __init__(self, name):
+            self._name = name
+        def __str__(self):
+            return "Item's name is :" + self._name
+        #def __repr__(self):
+        #    return "Item's name is :" + self._name
+    print((Item("Car")))     #调用__str__
+    print((Item("Car"),))    #调用__repr__，因为(Item("Car"),)是一个元组，所有Item("Car")调用__repr__
