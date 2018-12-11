@@ -9,11 +9,14 @@
     yum install gcc zlib-devel openssl sqlite-devel
 
 4、编译安装python
-    ./configure
+    ./configure --enable-shared  #如果要用pyinstaller, 需要加 --enable-shared
     make
     make install
 
 5、python3 --version
+    
+6、 vim /etc/ld.so.conf.d/python3.conf
+    /usr/local/bin
 
 ====================================================================
 

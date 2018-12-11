@@ -4,6 +4,11 @@
     # -*- coding: utf-8 -*- 或者 
     # coding=utf-8
     
+模块Import属性:
+    __name__:
+    __file__:表示文件本身，输出的是一个绝对路径
+    __path__:
+    
 
 
 编码:
@@ -37,6 +42,9 @@
             print (str[2:])      # 输出从第三个开始的后的所有字符     //noob
             print (str * 2)      # 输出字符串两次                    //RunoobRunoob
             print (str + "TEST") # 连接字符串                       //RunoobTEST
+
+        u'abc'      #u表示unicode string，在python3里面，所有字符串都是unicode string
+        r'abc'      #raw string，特殊字符不转义
 
 切片：
     L = list(range(100))
@@ -122,6 +130,11 @@
     @property               #获取属性值
     @{function}.setter      #设置属性值
 
+    #继承
+        #调用父类的__init__()方法
+            方法1: parent_class.__init()
+            方法2: super(subclass, self)._init__()        #父类需要继承object类
+
 IO编程：
     #读文件
         open()          #open('/Users/michael/test.txt', 'r')
@@ -189,7 +202,7 @@ IO编程：
     #多进程：Python既支持多进程，又支持多线程  
         在Unix/Linux下，可以使用fork()调用实现多进程。
         要实现跨平台的多进程，可以使用multiprocessing模块。
-        进程间通信是通过Queue、Pipes等实现的。
+        进程间通信方式: Queue, Pipe,Value, Array, Manager
 
     #多线程：
         Python的标准库提供了两个模块：_thread和threading，_thread是低级模块，threading是高级模块，对_thread进行了封装。
