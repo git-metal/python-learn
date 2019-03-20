@@ -1,0 +1,19 @@
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+spring:
+  application:
+    name: eureka-server
+
+#application
+cookie1: {domain: .yiyao.cc, expiry: 1521558688.480118, httpOnly: false, name: _ui_,
+  path: /, secure: false, value: HSX9fJjjCIImOJoPUkv/QA==}
